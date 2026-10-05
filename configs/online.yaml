@@ -1,0 +1,33 @@
+mode: online
+dataset_dir: data
+output_dir: results/online
+
+seed: 42
+val_ratio: 0.15
+normalization: robust
+batch_size: 256
+
+track_energy: true
+run_failure_experiments: true
+
+poison_percentile: 95.0
+poison_margin: 1.0
+poison_threshold_alpha: 0.05
+warmup_skip: 250
+
+models:
+  - RiverZScore
+  - StreamCNN
+  - RiverKMeans
+
+calibration:
+  sensitivity_weight: 1.0
+  competence_weight: 0.33
+  discriminability_weight: 0.33
+  temperature: 0.5
+  n_seeds: 5
+  contamination_levels: [0.02, 0.05, 0.10]
+
+tuning: false
+tuning_contamination: 0.05
+tuning_seed: 1337
